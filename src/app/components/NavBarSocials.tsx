@@ -5,14 +5,14 @@ export default function NavBarSocials() {
   return (
     <div className="flex space-x-4">
       <Link
-        href="https://github.com/yourusername"
+        href="https://github.com/ortizzxz"
         target="_blank"
         className="text-white hover:text-black transition-colors duration-200"
       >
         <FaGithub size={20} />
       </Link>
       <Link
-        href="https://linkedin.com/in/yourusername"
+        href="https://www.linkedin.com/in/jesusdortizreyes/"
         target="_blank"
         className="text-white hover:text-black transition-colors duration-200"
       >
