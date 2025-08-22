@@ -12,26 +12,18 @@ export default function AboutPage() {
       <div className="md:w-1/3 bg-gray-950 flex flex-col items-center justify-center p-8 md:rounded-3xl md:rounded-3xl shadow-lg border border-gray-800">
         <div className="mb-6">
           <Image
-            src="/" // /public/img
+            src="/img/yo.JPG" 
             alt="Imagen de Perfil"
-            width={120}
+            width={200}
             height={120}
             className="rounded-full border-4 border-sky-500 shadow-md"
           />
         </div>
-        <h1 className="text-2xl font-bold text-sky-950">J. Ortiz</h1>
+        <h1 className="text-2xl font-bold text-sky-800">J. Ortiz</h1>
         <p className="text-gray-700 text-center">
           Hello World! - Estudiante de informática y creador de este blog. Mi
           objetivo es documentar mi aprendizaje y compartir proyectos y recursos
           que me han ayudado en mi trayectoria.
-        </p>
-        <h2 className="text-xl text-sky-950">¿Qué es esto?</h2>
-        <p className="text-gray-700 text-sm text-center">
-          El sistemas de carpetas de Windows me parece aburrido, Mac es muy caro
-          y no tengo tiempo para lidiar con los errores en cualquier distro de
-          Linux. Por este motivo he decidido crear esto. En un principio quería
-          hacerlo solo para documentar mis notas, pero pensando en que puede
-          servir a otra persona he decidido hacerlo online.
         </p>
       </div>
 
