@@ -3,8 +3,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import matter from "gray-matter";
 import { getAllCategories, getPostsByCategory } from "../../../lib/getPosts";
 
-// Generate static paths for SSG
-export function generateStaticParams() {
+export async function generateStaticParams() {
   const categories = getAllCategories();
   const params: { category: string; slug: string }[] = [];
 
@@ -18,14 +17,12 @@ export function generateStaticParams() {
   return params;
 }
 
-// Page component
-export default async function PostPage({
-  params,
-}: {
-  params: { category: string; slug: string };
-}) {
-  // If getPostSource is async, await it
-  const source = await getPostSource(params.category, params.slug);
+// Let next infer types instead of forcing your own
+export default async function PostPage({ params }: { params: any }) {
+  const category = params.category;
+  const slug = params.slug;
+
+  const source = await getPostSource(category, slug);
   const { content, data } = matter(source);
 
   return (
