@@ -3,6 +3,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import matter from "gray-matter";
 import { getAllCategories, getPostsByCategory } from "../../../lib/getPosts";
 
+// Generate static paths for SSG
 export function generateStaticParams() {
   const categories = getAllCategories();
   const params: { category: string; slug: string }[] = [];
@@ -17,22 +18,22 @@ export function generateStaticParams() {
   return params;
 }
 
-export default function PostPage({
+// Page component
+export default async function PostPage({
   params,
 }: {
   params: { category: string; slug: string };
 }) {
-  const source = getPostSource(params.category, params.slug);
+  // If getPostSource is async, await it
+  const source = await getPostSource(params.category, params.slug);
   const { content, data } = matter(source);
 
   return (
     <article className="prose prose-slate dark:prose-invert mx-auto py-12 px-4 sm:px-6 lg:px-8 max-w-4xl">
-      {/* Post title */}
       <h1 className="text-4xl font-extrabold text-cyan-800 dark:text-cyan-400 mb-4">
         {data.title}
       </h1>
 
-      {/* Post date */}
       {data.date && (
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
           {new Date(data.date).toLocaleDateString("es-ES", {
@@ -43,7 +44,6 @@ export default function PostPage({
         </p>
       )}
 
-      {/* Post content */}
       <MDXRemote
         source={content}
         components={{
