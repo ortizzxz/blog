@@ -6,7 +6,7 @@ interface MenuItem {
   title: string;
   key: string;
   links?: { name: string; href: string }[];
-  href?: string; // optional href for single links
+  href?: string;
   locked?: boolean;
 }
 
@@ -26,26 +26,18 @@ const menuItems: MenuItem[] = [
       { name: "Ética, Legislación, Profesión", href: "/client/projects" },
     ],
   },
-  {
-    title: "Segundo",
-    key: "frontend",
-    links: [],
-    locked: true,
-  },
-  {
-    title: "Tercero",
-    key: "tertiary",
-    links: [],
-    locked: true,
-  },
-  {
-    title: "About Me",
-    key: "about",
-    href: "/about", // single link
-  },
+  { title: "Segundo", key: "frontend", links: [], locked: true },
+  { title: "Tercero", key: "tertiary", links: [], locked: true },
+  { title: "About Me", key: "about", href: "/about" },
 ];
 
-export default function NavBarMiddle() {
+export default function NavBarMiddle({
+  mobile,
+  onLinkClick,
+}: {
+  mobile?: boolean;
+  onLinkClick?: () => void;
+}) {
   const navRef = useRef<HTMLUListElement>(null);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
@@ -60,29 +52,55 @@ export default function NavBarMiddle() {
   }, []);
 
   return (
-    <ul className="flex items-center space-x-6 relative" ref={navRef}>
+    <ul
+      ref={navRef}
+      className={`${
+        mobile ? "flex flex-col space-y-2" : "flex items-center space-x-6"
+      } relative`}
+    >
       {menuItems.map((item) => (
         <li key={item.key} className="relative">
           {item.locked ? (
-            <span className="opacity-50 cursor-not-allowed">
-              {item.title}
-            </span>
-          ) : item.links ? (
+            <span className="opacity-50 cursor-not-allowed">{item.title}</span>
+          ) : item.links && item.links.length > 0 ? (
             <>
               <button
                 onClick={() =>
                   setOpenDropdown(openDropdown === item.key ? null : item.key)
                 }
-                className="hover:text-white transition-colors duration-200"
+                className={`${
+                  mobile ? "w-full text-left py-2 px-2" : "hover:text-white"
+                } transition-colors duration-200 flex justify-between items-center`}
               >
                 {item.title}
+                {mobile && (
+                  <span className="ml-2">
+                    {openDropdown === item.key ? "▲" : "▼"}
+                  </span>
+                )}
               </button>
+
               {openDropdown === item.key && (
-                <ul className="dropdown">
-                  <span className="dropdown-arrow"></span>
+                <ul
+                  className={`${
+                    mobile
+                      ? "pl-4 border-l border-cyan-400 mt-1 space-y-1"
+                      : "dropdown"
+                  }`}
+                >
                   {item.links.map((link) => (
                     <li key={link.href} className="whitespace-nowrap">
-                      <Link href={link.href} className="link">
+                      <Link
+                        href={link.href}
+                        className={`${
+                          mobile
+                            ? "block py-1 px-2 hover:bg-cyan-500 rounded"
+                            : "link"
+                        }`}
+                        onClick={() => {
+                          if (onLinkClick) onLinkClick(); // close mobile menu
+                        }}
+                      >
                         {link.name}
                       </Link>
                     </li>
@@ -92,8 +110,11 @@ export default function NavBarMiddle() {
             </>
           ) : (
             <Link
-              href={item.href!}
-              className="hover:text-white transition-colors duration-200"
+              href={item.href || "#"}
+              className={`${mobile ? "block py-2 px-2" : "hover:text-white"}`}
+              onClick={() => {
+                if (onLinkClick) onLinkClick(); // close mobile menu
+              }}
             >
               {item.title}
             </Link>
