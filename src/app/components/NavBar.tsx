@@ -3,6 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import NavBarSocials from "./NavBarSocials";
 import NavBarMiddle from "./NavBarMiddle";
+import Image from "next/image";
 
 export default function NavBar() {
   const navRef = useRef<HTMLDivElement>(null);
@@ -22,7 +23,15 @@ export default function NavBar() {
     <nav className="bg-cyan-700 shadow-md text-black" ref={navRef}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         <Link href="/">
-          <div className="font-bold text-xl text-white">[Logo]</div>
+          <div className="font-bold text-xl text-white">
+            <Image
+              src="/img/j_logo.png"
+              alt="Imagen de Logo"
+              width={55}
+              height={50}
+              className="rounded-full border-2 border-sky-500 shadow-lg"
+            />{" "}
+          </div>
         </Link>
 
         {/* Desktop menu */}
@@ -35,7 +44,7 @@ export default function NavBar() {
         <div className="md:hidden">
           <button
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="text-white focus:outline-none"
+            className="text-white focus:outline-none text-2xl"
           >
             {mobileOpen ? "✕" : "☰"}
           </button>
