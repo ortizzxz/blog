@@ -7,9 +7,9 @@ interface PostMeta {
 
 export default function BlogList({ posts }: { posts: PostMeta[] }) {
   return (
-    <div className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-4xl mx-auto">
       <h1 className="text-3xl font-extrabold text-cyan-800 dark:text-cyan-400 mb-8">
-        Notas
+        Últimas Notas
       </h1>
       <ul className="space-y-4">
         {posts.map((post) => (

@@ -6,7 +6,7 @@ export default function AboutPage() {
   return (
     <div
       className="flex flex-col md:flex-row p-1"
-      style={{ minHeight: "calc(100vh - 60px)" }} // Minus the NavBar
+      style={{ minHeight: "calc(100vh - 4.2rem)" }} // Minus the NavBar
     >
       {/* Left Side: Photo + Intro */}
       <div className="md:w-1/3 bg-gray-950 flex flex-col items-center justify-center p-8 md:rounded-3xl md:rounded-3xl shadow-lg border border-gray-800">
@@ -107,7 +107,7 @@ export default function AboutPage() {
 
               <h4 className="font-semibold text-gray-700 mb-2">Competencias</h4>
               <ul className="list-disc list-inside text-gray-600 space-y-1">
-                <li>...</li>
+                <li>Espera a que empiece</li>
               </ul>
             </div>
 
